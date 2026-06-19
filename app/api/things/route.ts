@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import prisma from "@/lib/prisma";
 
 export async function POST(request: NextRequest) {
   try {
@@ -12,12 +13,12 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // TODO: Save to database
-    const newThing = {
-      id: Date.now(),
-      name,
-      createdAt: new Date(),
-    };
+    const newThing = await prisma.thing.create({
+      data: {
+        name,
+        createdAt: new Date()
+      }
+    })
 
     console.log('newThing')
     console.log(newThing)
