@@ -1,8 +1,26 @@
 "use client";
 
 import { FormEvent, useRef, useState } from "react";
+import {
+  useQuery,
+} from '@tanstack/react-query'
 
 export default function Page() {
+
+  const { isPending, error, data } = useQuery({
+    queryKey: ['things'],
+    queryFn: () =>
+      fetch('/api/things', {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        }
+      }).then((res) =>
+        res.json(),
+      ),
+  })
+
+
   const [message, setMessage] = useState<string>("");
   const [isLoading, setIsLoading] = useState(false);
 
@@ -43,6 +61,18 @@ export default function Page() {
   return (
     <>
       <h1>Create a Thing</h1>
+      <h2>Things</h2>
+      { isPending &&
+        <p>Loading...</p>
+      }
+      { error &&
+        <p>Error loading things</p>
+      }
+      { !isPending && !error &&
+        <ul>
+          {data.map( (dataItem: any) => <li key={dataItem.id}>{dataItem.name}</li>)}
+        </ul>
+      }
       <p>Fill out the form and click submit to create a thing</p>
       <form onSubmit={handleSubmit} ref={formRef}>
         <div>
