@@ -4,6 +4,7 @@ import { FormEvent, useRef, useState } from "react";
 import {
   useQuery,
 } from '@tanstack/react-query'
+import useCustomHook from "@/app/_utils/useCustomHook";
 
 export default function Page() {
 
@@ -57,6 +58,11 @@ export default function Page() {
       setIsLoading(false);
     }
   };
+
+  //get things from custom hook
+
+  const customHookResponse = useCustomHook()
+  console.log(customHookResponse.data);
 
   return (
     <>
