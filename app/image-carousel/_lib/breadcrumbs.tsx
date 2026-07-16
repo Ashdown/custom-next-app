@@ -1,5 +1,6 @@
 import styles from "./breadcrumbs.module.css";
 import HiddenText from "@/app/image-carousel/_lib/hiddenText";
+import useIndexImages from "@/app/image-carousel/_utils/useIndexImages";
 
 type Props = {
   data: string[];
@@ -9,11 +10,12 @@ type Props = {
 }
 
 const Breadcrumbs = ({data, slidesPerPage, selectedImage, onSelectImage}: Props) => {
+
+  const indexImages = useIndexImages(data, slidesPerPage);
+
   return (
     <ul className={styles.dotNavigation}>
-      {
-        data.filter((_, index) => index % slidesPerPage === 0
-      ).map((image, index) =>
+      { indexImages.map((image, index) =>
         <li key={image} className={styles.dotButtonItem}>
           <button className={styles.dotButton} disabled={selectedImage === index * slidesPerPage}
                   onClick={() => onSelectImage(index)}>
