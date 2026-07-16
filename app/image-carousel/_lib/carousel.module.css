@@ -1,16 +1,22 @@
 .slideShow {
   position: relative;
+  overflow: hidden;
+}
+
+.slides {
+  position: relative;
+  height: 320px;
+  transition: var(--transition);
 }
 
 .slide {
-  background-color: white;
-  display: flex;
-  justify-content: center;
+  float: left;
+  height: 100%;
 }
 
 .image {
-  height: 300px;
-  width: auto;
+  width: 100%;
+  height: 100%;
 }
 
 .navigationButton {

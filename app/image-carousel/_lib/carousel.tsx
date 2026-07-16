@@ -42,18 +42,18 @@ const Carousel = ({data, slidesPerPage = 1}: Props) => {
 
   return <>
     <div className={styles.slideShow}>
-      <ul className={styles.slide}>
-        <li>
-          <img className={styles.image} src={data[selectedImage]} alt={`image ${selectedImage}`} />
-        </li>
-        <li>
-          <img className={styles.image} src={data[selectedImage + 1]} alt={`image ${selectedImage + 1}`} />
-        </li>
-        <li>
-          <img className={styles.image} src={data[selectedImage + 2]} alt={`image ${selectedImage + 2}`} />
-        </li>
+      <ul className={styles.slides} style={
+        {
+          width: `calc(100% * ${data.length} / ${slidesPerPage})`,
+          left: `calc(-100% / ${slidesPerPage} * ${selectedImage}`
+        }
+      }>
+        { data.map((src, index) =>
+          <li key={src} className={styles.slide} style={{width: `calc(100% / ${data.length})`}}>
+            <img className={styles.image} src={src} alt={`image ${index + 1}`} />
+          </li>
+        )}
       </ul>
-
       <ul>
         <li>
           <button className={`${styles.navigationButton} ${styles.previous}`} onClick={onPreviousImage}>

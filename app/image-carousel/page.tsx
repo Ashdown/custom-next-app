@@ -1,10 +1,6 @@
 import styles from "./page.module.css";
 import Carousel from "@/app/image-carousel/_lib/carousel";
 
-// TODO: break out into functions and unit test
-// TODO: add in a slide animation
-// TODO: fix broken odd images
-
 const IMAGES: string[] = [
   // 1
   "https://picsum.photos/id/0/200/300",
