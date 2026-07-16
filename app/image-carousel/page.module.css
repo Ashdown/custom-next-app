@@ -1,0 +1,41 @@
+.item {
+    background-color: var(--white);
+}
+.image {
+    margin-left: auto;
+    margin-right: auto;
+    height: 300px;
+}
+
+.dotNavigation {
+    text-align: center;
+}
+
+.dotButtonItem {
+    display: inline-block;
+    margin-right: 4px;
+}
+
+.dotButtonItem:last-child {
+    margin-right: 0;
+}
+
+.dotButton {
+    height: 10px;
+    width: 10px;
+    background-color: #95a5a6;
+    border-radius: 50%;
+}
+
+.dotButton:hover {
+    background-color: #c4d5d7;
+}
+
+.dotButton:disabled {
+    background-color: #b4e900;
+}
+
+.hiddenText {
+    position: absolute;
+    left: -9999px;
+}
