@@ -1,3 +1,10 @@
 .page {
+
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --transition: all 0.2s linear;
+
   margin: 25px;
+
+
 }

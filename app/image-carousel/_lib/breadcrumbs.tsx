@@ -1,4 +1,5 @@
 import styles from "./breadcrumbs.module.css";
+import HiddenText from "@/app/image-carousel/_lib/hiddenText";
 
 type Props = {
   data: string[];
@@ -16,7 +17,7 @@ const Breadcrumbs = ({data, slidesPerPage, selectedImage, onSelectImage}: Props)
         <li key={image} className={styles.dotButtonItem}>
           <button className={styles.dotButton} disabled={selectedImage === index * slidesPerPage}
                   onClick={() => onSelectImage(index)}>
-            <span className={styles.hiddenText}>Select image {index + 1}</span>
+            <HiddenText>image {index + 1}</HiddenText>
           </button>
         </li>
       )}

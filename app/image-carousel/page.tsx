@@ -1,7 +1,6 @@
 import styles from "./page.module.css";
 import Carousel from "@/app/image-carousel/_lib/carousel";
 
-// TODO: Fix carousel styling
 // TODO: break out into functions and unit test
 // TODO: add in a slide animation
 // TODO: fix broken odd images
@@ -26,7 +25,7 @@ const IMAGES: string[] = [
 const App = () => {
 
   return (
-    <div className={styles.container}>
+    <div className={styles.page}>
       <h1>Image Carousel</h1>
       <Carousel data={IMAGES} slidesPerPage={3}/>
     </div>

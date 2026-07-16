@@ -3,6 +3,7 @@
 import {useState} from "react";
 import styles from "./carousel.module.css";
 import Breadcrumbs from "@/app/image-carousel/_lib/breadcrumbs";
+import HiddenText from "@/app/image-carousel/_lib/hiddenText";
 
 type Props = {
   data: string[];
@@ -40,24 +41,30 @@ const Carousel = ({data, slidesPerPage = 1}: Props) => {
   };
 
   return <>
-    <ul>
-      <li>
-        <img className={styles.image} src={data[selectedImage]} alt={`image ${selectedImage}`} />
-      </li>
-      <li>
-        <img className={styles.image} src={data[selectedImage + 1]} alt={`image ${selectedImage}`} />
-      </li>
-      <li>
-        <img className={styles.image} src={data[selectedImage + 2]} alt={`image ${selectedImage}`} />
-      </li>
-    </ul>
+    <div className={styles.slideShow}>
+      <ul className={styles.slide}>
+        <li>
+          <img className={styles.image} src={data[selectedImage]} alt={`image ${selectedImage}`} />
+        </li>
+        <li>
+          <img className={styles.image} src={data[selectedImage + 1]} alt={`image ${selectedImage}`} />
+        </li>
+        <li>
+          <img className={styles.image} src={data[selectedImage + 2]} alt={`image ${selectedImage}`} />
+        </li>
+      </ul>
 
-    <ul>
-      <li>
-        <button onClick={onPreviousImage}>Previous</button>
-        <button onClick={onNextImage}>Next</button>
-      </li>
-    </ul>
+      <ul>
+        <li>
+          <button className={`${styles.navigationButton} ${styles.previous}`} onClick={onPreviousImage}>
+            <HiddenText>Previous</HiddenText>
+          </button>
+          <button className={`${styles.navigationButton} ${styles.next}`} onClick={onNextImage}>
+            <HiddenText>Next</HiddenText>
+          </button>
+        </li>
+      </ul>
+    </div>
     <Breadcrumbs data={data} slidesPerPage={slidesPerPage} selectedImage={selectedImage} onSelectImage={onSelectImage} />
   </>
 }
