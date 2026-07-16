@@ -47,10 +47,10 @@ const Carousel = ({data, slidesPerPage = 1}: Props) => {
           <img className={styles.image} src={data[selectedImage]} alt={`image ${selectedImage}`} />
         </li>
         <li>
-          <img className={styles.image} src={data[selectedImage + 1]} alt={`image ${selectedImage}`} />
+          <img className={styles.image} src={data[selectedImage + 1]} alt={`image ${selectedImage + 1}`} />
         </li>
         <li>
-          <img className={styles.image} src={data[selectedImage + 2]} alt={`image ${selectedImage}`} />
+          <img className={styles.image} src={data[selectedImage + 2]} alt={`image ${selectedImage + 2}`} />
         </li>
       </ul>
 
