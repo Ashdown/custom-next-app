@@ -1,0 +1,8 @@
+.item {
+    background-color: var(--white);
+}
+.image {
+    margin-left: auto;
+    margin-right: auto;
+    height: 300px;
+}
