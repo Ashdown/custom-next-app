@@ -17,15 +17,20 @@ describe('Carousel', () => {
     jest.clearAllMocks();
   });
 
-  it('renders the image at the initial selectedImage index', () => {
+  it('renders all images with correct src and alt', () => {
     render(<Carousel data={IMAGES} />);
-    expect(screen.getByAltText('image 0')).toHaveAttribute('src', 'a.jpg');
+    IMAGES.forEach((src, index) => {
+      expect(screen.getByAltText(`image ${index + 1}`)).toHaveAttribute('src', src);
+    });
   });
 
   it('advances to the next slide when Next is clicked', async () => {
     render(<Carousel data={IMAGES} slidesPerPage={2} />);
     await userEvent.click(screen.getByText('Next'));
-    expect(screen.getByAltText('image 2')).toHaveAttribute('src', 'c.jpg');
+    expect(mockBreadcrumbs).toHaveBeenLastCalledWith(
+      expect.objectContaining({ selectedImage: 2 }),
+      undefined
+    );
   });
 
   it('wraps back to the first slide when Next is clicked on the last slide', async () => {
@@ -33,20 +38,42 @@ describe('Carousel', () => {
     await userEvent.click(screen.getByText('Next'));
     await userEvent.click(screen.getByText('Next'));
     await userEvent.click(screen.getByText('Next'));
-    expect(screen.getByAltText('image 0')).toHaveAttribute('src', 'a.jpg');
+    expect(mockBreadcrumbs).toHaveBeenLastCalledWith(
+      expect.objectContaining({ selectedImage: 0 }),
+      undefined
+    );
   });
 
   it('goes to the previous slide when Previous is clicked', async () => {
     render(<Carousel data={IMAGES} slidesPerPage={2} />);
     await userEvent.click(screen.getByText('Next'));
     await userEvent.click(screen.getByText('Previous'));
-    expect(screen.getByAltText('image 0')).toHaveAttribute('src', 'a.jpg');
+    expect(mockBreadcrumbs).toHaveBeenLastCalledWith(
+      expect.objectContaining({ selectedImage: 0 }),
+      undefined
+    );
   });
 
   it('wraps to the last image when Previous is clicked on the first slide', async () => {
     render(<Carousel data={IMAGES} slidesPerPage={1} />);
     await userEvent.click(screen.getByText('Previous'));
-    expect(screen.getByAltText('image 5')).toHaveAttribute('src', 'f.jpg');
+    expect(mockBreadcrumbs).toHaveBeenLastCalledWith(
+      expect.objectContaining({ selectedImage: 5 }),
+      undefined
+    );
+  });
+
+  it('passes correct props to Breadcrumbs', () => {
+    render(<Carousel data={IMAGES} slidesPerPage={2} />);
+    expect(mockBreadcrumbs).toHaveBeenCalledWith(
+      expect.objectContaining({
+        data: IMAGES,
+        slidesPerPage: 2,
+        selectedImage: 0,
+        onSelectImage: expect.any(Function),
+      }),
+      undefined
+    );
   });
 
   it('updates selectedImage when onSelectImage is called via Breadcrumbs', async () => {
