@@ -28,7 +28,7 @@ const Carousel = ({data, slidesPerPage = 1}: Props) => {
 
       const remainder = data.length % slidesPerPage;
       // 10 % 3 = 2
-      setSelectedImage(data.length - remainder + 1)
+      // setSelectedImage(data.length - remainder + 1)
 
       setSelectedImage(data.length - 1);
     } else {
