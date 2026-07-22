@@ -1,5 +1,8 @@
+'use client';
+
 import styles from "./page.module.css";
 import Carousel from "@/app/image-carousel/_lib/carousel";
+import {useEffect} from "react";
 
 const IMAGES: string[] = [
   // 1
@@ -19,6 +22,24 @@ const IMAGES: string[] = [
 ];
 
 const App = () => {
+
+  const doSomething = () => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve("resolved");
+      }, 2000);
+    });
+  }
+
+  const call = async () => {
+    // const result = await doSomething();
+    // console.log(result);
+
+    doSomething().then((result) => console.log(result));
+
+  }
+
+  call();
 
   return (
     <div className={styles.page}>
